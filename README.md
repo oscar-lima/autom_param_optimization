@@ -23,4 +23,4 @@ the default algorithm values. We also contribute with an open
 source experimental setup, based on the popular Robot Operating
 System ROS, which can be easily adapted to other algorithms.
 
-You can consult the full article [here](link_todo)
+You can consult the full article [here](https://github.com/oscar-lima/autom_param_optimization/blob/master/autom_param_optimization.pdf)
