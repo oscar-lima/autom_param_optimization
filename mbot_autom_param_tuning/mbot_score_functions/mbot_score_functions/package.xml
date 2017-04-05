@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package>
+  <name>mbot_score_functions</name>
+  <version>0.0.1</version>
+  <description>
+    mbot score functions metapackage
+    Compute quality score of a particular algorithm run.
+    Useful for automatic parameter tuning, typically runs on rosbag data.
+    Currently only gmapping and AMCL are supported.
+  </description>
+  <license>GPLv3</license>
+
+  <author email="olima@isr.tecnico.ulisboa.pt">Oscar Lima</author>
+
+  <maintainer email="olima@isr.tecnico.ulisboa.pt">Oscar Lima</maintainer>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+    <metapackage/>
+  </export>
+</package>

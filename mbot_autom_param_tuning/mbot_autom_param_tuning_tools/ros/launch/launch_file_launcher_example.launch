@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- NOTE: This is an example launch file, please do not modify! -->
+
+    <!-- launch a ROS algorithm (launch file) from code -->
+
+    <!-- specify if the node to run requires any remaps -->
+    <arg name="remap_required" default="false" />
+    
+    <arg name="loop_rate" default="30.0" />
+    
+    <!-- the name of the ros package in which the node is conatined -->
+    <arg name="node_pkg" default="my_node_pkg" />
+    
+    <!-- the type of the node which needs to be launched -->
+    <arg name="node_type" default="my_node_type" />
+    
+    <!-- the name of the node which needs to be runned -->
+    <arg name="node_name" default="my_node_name" />
+    
+    <!-- the path to the configuration yaml file to be uploaded to parameter server -->
+    <arg name="node_param_yaml_file" default="$(find mbot_autom_param_tuning_tools)/ros/config/my_node_params.yaml" />
+    
+    <!-- node to run a node from code when it receives e_start signal on event_in topic -->
+    <node pkg="mbot_autom_param_tuning_tools" type="node_launcher_node" name="node_launcher" output="screen" >
+        <param name="loop_rate" value="30.0"/> <!-- node frequency -->
+        <param name="node_pkg" value="$(arg node_pkg)"/>
+        <param name="node_type" value="$(arg node_type)"/>
+        <param name="node_name" value="$(arg node_name)"/>
+        <!--rosparam param="remap_args" subst_value="True" if="$(arg remap_required)" >
+            [map, mbot_automatic_param_tuning/map, 
+             map_metadata, mbot_automatic_param_tuning/map_metadata,
+             scan, /scan_front]
+        </rosparam-->
+        <param name="node_params" value="$(arg node_param_yaml_file)"/>
+    </node>
+
+</launch>

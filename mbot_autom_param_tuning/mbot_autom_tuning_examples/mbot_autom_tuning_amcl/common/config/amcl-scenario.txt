@@ -1,0 +1,6 @@
+use-instances = false
+runObj = QUALITY
+numberOfRunsLimit = 500
+algo = "rosrun mbot_autom_param_tuning_tools smac_wrapper_node amcl"
+algo-deterministic = false
+log-all-calls = true

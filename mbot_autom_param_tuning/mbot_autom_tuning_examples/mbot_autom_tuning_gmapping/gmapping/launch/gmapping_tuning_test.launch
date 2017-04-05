@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Automatic parameter tuning of gmapping main launch file -->
+
+  <!-- mbot_2dslam algorithm path to tune -->
+  <arg name="mbot_2dslam_launch_file_path" default="$(find mbot_automatic_param_tuning)/ros/test/2dslam.launch" />
+
+  <!-- rosbag launch file path -->
+  <arg name="rosbag_launch_file_path" default="$(find mbot_automatic_param_tuning)/ros/test/bags/29082016_10pm/run_bag.launch" />
+  
+  <!-- whether source_pointcloud should be transformed (rotated and translated) to match target_pointcloud -->
+  <arg name="match_pointclouds" default="true"/>
+
+  <!-- parameter to set all nodes to use sim time comming from /clock topic  -->
+  <param name="use_sim_time" value="true" />
+
+  <!-- automatic launcher for rosbag player -->
+  <node pkg="mbot_automatic_param_tuning" type="algorithm_launcher_node" name="rosbag_launcher"
+        output="screen" ns="mbot_automatic_param_tuning" >
+    <param name="launch_file_path" value="$(arg rosbag_launch_file_path)" />
+  </node>
+
+  <!-- transform map to pointcloud -->
+  <node pkg="mbot_automatic_param_tuning" type="occupancy_grid_to_pointcloud"
+        name="occupancy_grid_to_pointcloud" output="screen" ns="mbot_automatic_param_tuning" >
+    <remap from="~eval_map" to="map" />
+  </node>
+
+  <!-- mocap pointcloud publisher-->
+  <include file="$(find mbot_automatic_param_tuning)/ros/launch/publish_ground_truth_points.launch"
+           ns="mbot_automatic_param_tuning" />
+
+  <!-- matching pointcloud algorithm -->
+  <include file="$(find mbot_automatic_param_tuning)/ros/launch/iterative_closest_point_eval.launch"
+           ns="mbot_automatic_param_tuning" >
+    <arg name="source_pointcloud" value="/mbot_automatic_param_tuning/ground_truth_points" />
+    <arg name="target_pointcloud" value="/mbot_automatic_param_tuning/occupancy_grid_to_pointcloud/map_cloud" />
+    <arg name="match_pointclouds" value="$(arg match_pointclouds)" />
+  </include>
+
+  <!-- automatic launcher for slam gmapping -->
+  <include file="$(find mbot_automatic_param_tuning)/ros/test/gmapping_launcher.launch"
+           ns="mbot_automatic_param_tuning" >
+    <arg name="remap_required" default="true" />
+  </include>
+
+  <!-- automatic tuning algorithm coordinator -->
+  <node pkg="mbot_automatic_param_tuning" type="automatic_tuning_coordinator_node"
+        name="coordinator" output="screen" required="true" ns="mbot_automatic_param_tuning" >
+      <param name="coordinator_name" value="coordinator" />
+      <param name="gmapping_launcher_name" value="gmapping_launcher" />
+      <param name="rosbag_launcher_name" value="rosbag_launcher" />
+      <param name="occupancy_grid_to_pointcloud_name" value="occupancy_grid_to_pointcloud" />
+      <param name="gt_point_publisher_node_name" value="gt_point_publisher_node" />
+      <param name="iterative_closest_point_eval_name" value="iterative_closest_point_eval" />
+  </node>
+
+</launch>

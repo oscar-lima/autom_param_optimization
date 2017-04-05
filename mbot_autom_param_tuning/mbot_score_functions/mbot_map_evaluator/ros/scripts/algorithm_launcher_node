@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+
+import mbot_automatic_param_tuning_ros.algorithm_launcher
+
+if __name__ == '__main__':
+    mbot_automatic_param_tuning_ros.algorithm_launcher.main()

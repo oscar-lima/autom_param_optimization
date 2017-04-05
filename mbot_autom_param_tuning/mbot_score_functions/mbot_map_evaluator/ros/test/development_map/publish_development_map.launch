@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- map server -->
+  
+  <!-- map to be evaluated -->
+  <arg name="eval_map" default="$(find mbot_automatic_param_tuning)/ros/test/development_maps/eval_map.yaml" />
+  
+  <!-- publish map to be evaluated -->
+  <node pkg="map_server" type="map_server" name="eval_map_server" args="$(arg eval_map)" >
+    <remap from="map" to="/occupancy_grid_to_pointcloud_node/eval_map" />
+    <remap from="map_metadata" to="/occupancy_grid_to_pointcloud_node/eval_map_metadata" />
+  </node>
+
+</launch>

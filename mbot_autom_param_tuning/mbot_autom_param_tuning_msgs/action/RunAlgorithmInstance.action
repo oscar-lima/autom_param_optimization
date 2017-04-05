@@ -1,0 +1,9 @@
+# goal definition
+float64 rosbag_duration
+---
+# result definition
+bool success
+---
+# feedback
+string current_state
+string text

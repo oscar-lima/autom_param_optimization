@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package>
+  <name>mbot_republishers</name>
+  <version>0.0.1</version>
+  <description>
+      Republish data which cannot be visualize by rviz so that it can be seen afterwards
+      i.e : republish     
+      geometry_msgs/PoseWithCovarianceStamped as geometry_msgs/PoseStamped
+  </description>
+
+  <maintainer email="olima@isr.tecnico.ulisboa.pt">Oscar Lima</maintainer>
+
+  <license>GPLv3</license>
+
+  <author email="olima@isr.tecnico.ulisboa.pt">Oscar Lima</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  
+  <run_depend>roscpp</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+
+</package>

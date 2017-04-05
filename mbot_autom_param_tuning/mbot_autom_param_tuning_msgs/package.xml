@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+    <name>mbot_autom_param_tuning_msgs</name>
+    <version>1.0.0</version>
+    <description>
+        Messages required to interact with the run algorithm instance action server
+    </description>
+
+    <author email="olima@isr.tecnico.ulisboa.pt">Oscar Lima</author>
+    <maintainer email="olima@isr.tecnico.ulisboa.pt">Oscar Lima</maintainer>
+
+    <license>GPLv3</license>
+
+    <buildtool_depend>catkin</buildtool_depend>
+
+    <build_depend>actionlib</build_depend>
+    <build_depend>actionlib_msgs</build_depend>
+    <build_depend>message_generation</build_depend>
+
+    <run_depend>actionlib</run_depend>
+    <run_depend>actionlib_msgs</run_depend>
+
+</package>

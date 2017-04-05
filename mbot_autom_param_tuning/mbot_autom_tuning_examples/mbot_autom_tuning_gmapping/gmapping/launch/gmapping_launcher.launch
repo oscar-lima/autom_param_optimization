@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- launch an instance of gmapping using generic node launcher node -->
+    
+    <!-- specify if any remaps are needed in the node -->
+    <arg name="remap_required" default="true" />
+    
+    <!-- launch gmapping SLAM -->
+    <node pkg="mbot_automatic_param_tuning" type="node_launcher_node" name="gmapping_launcher" output="screen" >
+        <param name="loop_rate" value="30.0"/> <!-- node frequency -->
+        <param name="node_pkg" value="gmapping"/>
+        <param name="node_type" value="slam_gmapping"/>
+        <param name="node_name" value="slam_gmapping"/>
+        <rosparam param="remap_args" subst_value="True" if="$(arg remap_required)" >
+            [map, mbot_automatic_param_tuning/map, 
+             map_metadata, mbot_automatic_param_tuning/map_metadata,
+             scan, /scan_front]
+        </rosparam>
+        <param name="node_params" value="$(find mbot_automatic_param_tuning)/ros/test/default_gmapping_params.yaml"/>
+    </node>
+
+</launch>

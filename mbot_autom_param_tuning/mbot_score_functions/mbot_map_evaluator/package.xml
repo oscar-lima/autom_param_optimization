@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<package>
+  <name>mbot_map_evaluator</name>
+  <version>0.0.1</version>
+  <description>
+    Compute quality score which evaluates how good a map is compared to 
+    a set of ground truth points that the map is expected to contain.
+    The approach uses iterative closest point from PCL to match the gt
+    pointcloud data with the map.
+  </description>
+
+  <maintainer email="olima@isr.tecnico.ulisboa.pt">Oscar Lima</maintainer>
+
+  <license>GPLv3</license>
+
+  <author email="olima@isr.tecnico.ulisboa.pt">Oscar Lima</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>pcl_ros</build_depend>
+  <build_depend>pcl_conversions</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>tf</build_depend>
+  
+  <run_depend>roscpp</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>hokuyo_node</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>nav_msgs</run_depend>
+  <run_depend>pcl_ros</run_depend>
+  <run_depend>pcl_conversions</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>tf</run_depend>
+
+  <test_depend>roslaunch</test_depend>  
+
+</package>

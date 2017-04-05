@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- path to recorded rosbag with the laser scanner data -->
+    <arg name="rosbag_filename" default="29082016_10pm_without_tf_map_to_odom_timestamps_corrected" />
+    <arg name="rosbag_path"
+         default="$(find mbot_autom_tuning_amcl)/ros/experimental_data/bags/$(arg rosbag_filename).bag" />
+    
+    <!-- arguments that will be passed to the rosbag play -->
+    <!-- publish time on /clock topic, start at 160 sec, for a duration of 30 seconds, no console output (quiet) -->
+    <arg name="rosbag_args" default="--clock -s 160 -u 30 -q $(arg rosbag_path)"/>
+    
+    <!-- run rosbag with a robot moving around the environment with laser scanner data inside -->
+    <node pkg="rosbag" type="play" name="player" output="screen" args="$(arg rosbag_args)" />
+
+</launch>

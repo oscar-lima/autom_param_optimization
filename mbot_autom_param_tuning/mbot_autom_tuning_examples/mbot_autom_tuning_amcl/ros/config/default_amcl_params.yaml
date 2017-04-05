@@ -1,0 +1,48 @@
+use_map_topic:               false             # mbot default: true
+first_map_only:              false             # mbot default: true
+gui_publish_rate:           -1.0
+save_pose_rate:              0.5
+laser_min_range:            -1.0               # mbot default: 0.04, -1.0 will cause the laser's reported minimum range to be used
+laser_max_range:            -1.0               # mbot default: 5.0, -1.0 will cause the laser's reported maximum range to be used
+#laser_max_beams:             30
+#min_particles:               100
+#max_particles:               5000              # mbot default: 2000
+#kld_err:                     0.01
+#kld_z:                       0.99
+#odom_alpha1:                 0.005            # mbot default: 7.0
+#odom_alpha2:                 0.005            # mbot default: 5.0
+#odom_alpha3:                 0.010            # mbot default: 5.0
+#odom_alpha4:                 0.005            # mbot default: 5.0
+#odom_alpha5:                 0.003            # mbot default: 7.0
+do_beamskip:                 false
+beam_skip_distance:          0.5
+beam_skip_threshold:         0.3
+#beam_skip_error_threshold_:  0.9
+#laser_z_hit:                 0.95
+#laser_z_short:               0.1               # mbot default: 0.01
+#laser_z_max:                 0.05
+#laser_z_rand:                0.05
+#laser_sigma_hit:             0.2
+#laser_lambda_short:          0.1
+#laser_likelihood_max_dist:   2.0               # mbot default: 1.0
+laser_model_type:            likelihood_field
+odom_model_type:             omni-corrected    # mbot default: omni
+#update_min_d:                0.2               # mbot default : 0.05
+#update_min_a:                0.5236            # M_PI/6.0, mbot default: 0.01
+odom_frame_id:               odom
+base_frame_id:               base_link
+global_frame_id:             map
+#resample_interval:           2
+transform_tolerance:         0.1
+#recovery_alpha_slow:         0.001             # mbot default: 0.0
+#recovery_alpha_fast:         0.1               # mbot default: 0.0
+tf_broadcast:                true
+bag_scan_period:            -1.0               # For slowing play-back when reading directly from a bag file
+
+# initial pose of the robot (depends on where do you start playing the bag)
+initial_pose_x: -0.272917807102                # the first mocap gt pose msg received in the bag when start playing
+initial_pose_y: -2.81320095062
+initial_pose_a: 0.6253106427416798             # transform quaternion to yaw of the first mocap msg received from the bag
+initial_cov_xx: 0.25                           # 0.5 * 0.5
+initial_cov_yy: 0.25                           # 0.5 * 0.5
+initial_cov_aa: 0.06853891945200942            # (M_PI/12.0) * (M_PI/12.0)

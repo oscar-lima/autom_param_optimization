@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- amcl instance server, provides an interface to run a experiment instance trough actionlib -->
+  <include file="$(find mbot_autom_tuning_amcl)/ros/launch/amcl_instance_server.launch" />
+  
+  <!-- smac: third party software generic algorithm tuner (ros independant) -->
+  <include file="$(find mbot_autom_tuning_amcl)/ros/launch/amcl_smac.launch" />
+
+</launch>

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- parameter to set all nodes to use sim time comming 
+       from rosbag player node published on /clock topic  -->
+  <param name="use_sim_time" value="true" />
+  
+  <!-- the path of the rosbag file to be used for tuning the algorithm -->
+  <arg name="rosbag_launch_file_path"
+       value="$(find mbot_autom_tuning_amcl)/ros/experimental_data/bags/amcl_run_bag.launch" />
+  
+  <!-- publish clock when rosbag is not playing -->
+  <node pkg="mbot_autom_param_tuning_tools" type="clock_pub" name="clock_publisher" 
+        output="screen" >
+    <param name="node_frequency" value="20.0" />
+    <remap from="~clock" to="/wall_clock"/>
+  </node>
+  
+  <!-- launch algorithm dependencies -->
+  <include file="$(find mbot_autom_tuning_amcl)/ros/launch/amcl_dependencies.launch" >
+    <!-- map server, the path to the map config file -->
+    <arg name="map" default="$(find mbot_world_model)/maps/isr-testbed/map.yaml" />
+  </include>
+  
+  <!-- node launcher, wait for trigger, then runs a node (amcl in this case) -->
+  <include file="$(find mbot_autom_tuning_amcl)/ros/launch/amcl_launcher.launch" />
+  
+  <!-- launch file node interface (used for rosbag player) -->
+  <node pkg="mbot_autom_param_tuning_tools" type="launch_file_launcher_node"
+        name="rosbag_launcher" output="screen" >
+    <param name="launch_file_path" value="$(arg rosbag_launch_file_path)" />
+  </node>
+  
+  <!-- launch algorithm score function -->
+  <include file="$(find mbot_autom_tuning_amcl)/ros/launch/amcl_score_function.launch" >
+    <!-- The two poses to compare -->
+    <arg name="pose_1" value="vrpn_client_node/base_link_gt/pose" /> <!-- reference pose -->
+    <arg name="pose_2" value="amcl_pose_stamped" /> <!-- target pose -->
+  </include>
+  
+  <!-- node that gets cpu time of amcl -->
+  <node pkg="mbot_autom_param_tuning_tools" type="cpu_time_reader_node" 
+        name="cpu_time_reader" output="screen" >
+    <param name="time_unit" value="ticks" />
+    <param name="node_name" value="amcl" />
+  </node>
+  
+  <!-- coordinate algorithm instance executor state machine wrapped around action lib -->
+  <node pkg="mbot_autom_param_tuning_tools" type="run_algorithm_instance_server_node" 
+        name="run_algorithm_instance_server" output="screen" >
+    <remap from="/clock" to="/wall_clock"/>
+  </node>
+  
+  <!-- start the time publisher node -->
+  <node pkg="rostopic" type="rostopic" name="time_pub_starter_node"
+        args="pub --once /clock_publisher/event_in std_msgs/String e_start" output="screen" />
+  
+  <!-- smac: third party software generic algorithm tuner (ros independant) -->
+
+</launch>

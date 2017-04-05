@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+
+import mbot_automatic_param_tuning_ros.automatic_tuning_coordinator
+
+if __name__ == '__main__':
+    mbot_automatic_param_tuning_ros.automatic_tuning_coordinator.main()

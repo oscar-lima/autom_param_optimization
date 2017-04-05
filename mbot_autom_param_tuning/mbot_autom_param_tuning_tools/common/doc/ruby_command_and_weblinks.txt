@@ -1,0 +1,25 @@
+./paramils -numRun 0 -scenariofile example_saps/scenario-Saps-SWGCP-sat-small-train-small-test.txt -validN 100
+
+holger home page
+http://www.cs.ubc.ca/~hoos/
+
+holger research interests
+http://www.cs.ubc.ca/~hoos/research.html
+
+list of holger publications
+http://www.cs.ubc.ca/~hoos/publications.html
+
+springer link to paper with missing abstract
+http://link.springer.com/chapter/10.1007/978-3-642-21434-9_3
+
+paramils download website
+http://www.cs.ubc.ca/labs/beta/Projects/ParamILS/
+
+just to solve the saps problem:
+./ubcsat -alg saps -i ubcsat_source/sample.cnf -solve
+
+command for gmapping paramils
+./paramils -numRun 0 -scenariofile example_gmapping/scenario_gmapping_1.txt -validN 1
+
+validN = number of times to run the algorithm
+numRun = if you launch with many cores and you are launching many instances, vary this number

@@ -1,0 +1,28 @@
+1.launch_ros_algorithm:
+    event_in_topic: /node_launcher/event_in
+    event_in_strings: [e_start]
+    event_out_topic: /node_launcher/event_out
+2.play_rosbag_data:
+    event_in_topic: /rosbag_launcher/event_in
+    event_in_strings: [e_start]
+    event_out_topic: /rosbag_launcher/event_out
+3.start_clock:
+    event_in_topic: /clock_publisher/event_in
+    event_in_strings: [e_start]
+    event_out_topic: /clock_publisher/event_out
+4.start_score_function:
+    event_in_topic: /scoring_function/event_in
+    event_in_strings: [e_start]
+    event_out_topic: /scoring_function/event_out
+5.wait_for_rosbag_end:
+    event_in_topic: /disabled
+    event_in_strings: [e_done]
+    event_out_topic: /rosbag_launcher/status
+6.stop_score_function:
+    event_in_topic: /scoring_function/event_in
+    event_in_strings: [e_stop]
+    event_out_topic: /scoring_function/event_out
+7.shudown_ros_algorithm:
+    event_in_topic: /node_launcher/event_in
+    event_in_strings: [e_stop]
+    event_out_topic: /node_launcher/event_out

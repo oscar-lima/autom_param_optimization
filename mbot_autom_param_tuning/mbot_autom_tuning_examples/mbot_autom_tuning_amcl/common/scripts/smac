@@ -1,0 +1,4 @@
+#!/bin/bash
+# ignore arg 0, run arg 1 with args 2-5
+echo 'runing command: ' ${@:1:5}
+${@:1:5}

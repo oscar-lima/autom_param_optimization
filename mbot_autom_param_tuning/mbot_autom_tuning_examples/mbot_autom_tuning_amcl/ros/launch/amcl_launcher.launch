@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- launch an instance of amcl using generic node launcher node -->
+    
+    <!-- specify if any remaps are needed in the node -->
+    <arg name="remap_required" default="true" />
+    
+    <!-- amcl launcher : wait for trigger then launch amcl -->
+    <node pkg="mbot_autom_param_tuning_tools" type="node_launcher_node" name="node_launcher" output="screen" >
+        <param name="loop_rate" value="10.0"/> <!-- node frequency -->
+        <param name="node_pkg" value="amcl"/>
+        <param name="node_type" value="amcl"/>
+        <param name="node_name" value="amcl"/>
+        <rosparam param="remap_args" subst_value="True" if="$(arg remap_required)" >
+            [scan, scan_front]
+        </rosparam>
+        <param name="node_params" value="$(find mbot_autom_tuning_amcl)/ros/config/default_amcl_params.yaml"/>
+    </node>
+
+</launch>

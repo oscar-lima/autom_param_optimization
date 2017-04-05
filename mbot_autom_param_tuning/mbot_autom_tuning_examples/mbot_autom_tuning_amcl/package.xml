@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package>
+  <name>mbot_autom_tuning_amcl</name>
+  <version>0.0.1</version>
+  <description>
+      Example of how to configure AMCL ROS algorithm to be automatically tuned (its parameters) 
+      with the mbot_autom_param_tuning pkg.
+  </description>
+
+  <maintainer email="olima@isr.tecnico.ulisboa.pt">Oscar Lima</maintainer>
+
+  <license>GPLv3</license>
+
+  <author email="olima@isr.tecnico.ulisboa.pt">Oscar Lima</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  
+  <run_depend>roscpp</run_depend>
+
+</package>

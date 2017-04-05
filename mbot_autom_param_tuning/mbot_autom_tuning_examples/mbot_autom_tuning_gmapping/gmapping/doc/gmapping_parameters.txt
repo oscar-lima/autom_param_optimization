@@ -1,0 +1,198 @@
+Slam gmapping parameters
+========================
+
+fixed parameters
+================
+
+/slam_gmapping/base_frame
+value: base_link
+
+/slam_gmapping/map_frame
+value: map
+
+/slam_gmapping/odom_frame
+value: odom
+
+/slam_gmapping/maxUrange
+description: The maximum usable range of the laser. A beam is cropped to this value
+value: 5.59 (4.5 earlier value)
+
+/slam_gmapping/lskip
+type: float
+description: Number of beams to skip in each scan.
+take only every (n+1)th laser ray for computing a match (0 = take all rays)
+default: 0
+
+/slam_gmapping/xmin
+type: float
+description: Initial map size
+default: -100.0
+value: -10.0
+
+/slam_gmapping/ymin
+type: float
+description: Initial map size
+default: -100.0
+value: -10.0
+
+/slam_gmapping/xmax
+type: float
+description: Initial map size
+default: 100.0
+value: 10.0
+
+/slam_gmapping/ymax
+type: float
+description: Initial map size
+default: 100.0
+value: 10.0
+
+/slam_gmapping/delta
+type: float
+description: Resolution of the map
+size of one pixel [m]
+default: 0.05
+value: 0.03
+
+/slam_gmapping/transform_publish_period
+type: float
+description: How long (in seconds) between transform publications
+default: 0.05
+
+/slam_gmapping/maxRange
+type: float
+description: The maximum range of the sensor. If regions with no obstacles within the range 
+of the sensor should appear as free space in the map, set maxUrange < maximum range of the real sensor <= maxRange. 
+default: not set
+
+params
+======
+
+/slam_gmapping/kernelSize
+type: int
+description: The kernel in which to look for a correspondence.
+search window for the scan matching process. gmapping corrects current pose based on scan matching
+default: 1
+
+/slam_gmapping/lstep
+type: float
+description: The optimization step in translation
+initial search step for scan matching (linear).
+default: 0.05
+
+/slam_gmapping/astep
+type: float
+description: The optimization step in rotation
+initial search step for scan matching (angular)
+default: 0.05
+
+/slam_gmapping/iterations
+type: int
+description: The number of iterations of the scanmatcher.
+number of refinement steps in the scan matching. 
+The final "precision" for the match is lstep*2^(-iterations) or astep*2^(-iterations), respectively.
+default: 5
+
+*
+/slam_gmapping/map_update_interval
+description:How long (in seconds) between updates to the map. Lowering this number updates the occupancy grid more often, at the expense of greater computational load
+type: float
+default value: 5.0
+
+/slam_gmapping/sigma
+type: float
+description: The sigma used by the greedy endpoint matching.
+standard deviation for the scan matching process (cell)
+default: 0.05
+
+/slam_gmapping/lsigma
+type: float
+description: The sigma of a beam used for likelihood computation.
+standard deviation for the scan matching process (single laser beam)
+default: 0.075
+
+/slam_gmapping/ogain
+type: float
+description: Gain to be used while evaluating the likelihood, for smoothing the resampling effects
+default: 3.0
+
+/slam_gmapping/srr
+type: float
+description: Odometry error in translation as a function of translation (rho/rho)
+default: 0.1
+
+/slam_gmapping/srt
+type: float
+description: Odometry error in translation as a function of rotation (rho/theta)
+default: 0.2
+
+/slam_gmapping/str
+type: float
+description: Odometry error in rotation as a function of translation (theta/rho)
+default: 0.1
+
+/slam_gmapping/stt
+type: float
+description: Odometry error in rotation as a function of rotation (theta/theta)
+default: 0.2
+
+*
+/slam_gmapping/linearUpdate
+type: float
+description: Process a scan each time the robot translates this far
+default: 1.0
+
+*
+/slam_gmapping/angularUpdate
+type: float
+description: Process a scan each time the robot rotates this far 
+default: 0.5
+
+/slam_gmapping/temporalUpdate
+type: float
+description: Process a scan if the last scan proccessed is older than the update time in seconds. 
+A value less than zero will turn time based updates off
+default: -1.0
+
+*
+/slam_gmapping/resampleThreshold
+type: float
+description: The Neff based resampling threshold.
+Threshold at which the particles get resampled. Higher means more frequent resampling.
+default: 0.5
+
+*
+/slam_gmapping/particles
+type: float
+description: Number of particles in the filter
+default: 30
+
+/slam_gmapping/llsamplerange
+type: float
+description: Translational sampling range for the likelihood
+Likelihood sampling (used in scan matching)
+default: 0.01
+
+/slam_gmapping/llsamplestep
+type: float
+description: Translational sampling step for the likelihood
+Likelihood sampling (used in scan matching)
+default: 0.01
+
+/slam_gmapping/lasamplerange
+type: float
+description: Angular sampling range for the likelihood
+Likelihood sampling (used in scan matching)
+default: 0.005
+
+/slam_gmapping/lasamplestep
+type: float
+description: Angular sampling step for the likelihood
+Likelihood sampling (used in scan matching)
+default: 0.005
+
+/slam_gmapping/occ_thresh
+type: float
+description: Threshold on gmapping's occupancy values. Cells with greater occupancy are
+considered occupied (i.e., set to 100 in the resulting sensor_msgs/LaserScan). New in 1.1.0.
+default: 0.25

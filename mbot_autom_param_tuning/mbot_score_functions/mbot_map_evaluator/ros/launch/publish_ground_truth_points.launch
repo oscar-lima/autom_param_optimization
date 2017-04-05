@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- the reference frame in which the ground truth points are expresed -->
+    <arg name="gt_points_frame_id" default="map"/>
+    
+    <!-- the location of the ground truth samples, in .pcd pointcloud format -->
+    <arg name="gt_pcd_file" default="$(find mbot_automatic_param_tuning)/ros/data/gt_map_points.pcd"/>
+ 
+    <!-- frequency at which the pointcloud with ground truth information will be published -->
+    <arg name="gt_points_frequency" default="10"/>
+    
+    <!-- the topic to which the .pcd file will be published -->
+    <arg name="cloud_pcd_topic" default="ground_truth_points"/>
+    
+    <!-- mbot hw interface nodes for monarch base and devices (no arm) -->
+    <node pkg="pcl_tools" type="publish_pcd_pointcloud" name="gt_point_publisher_node" args="$(arg gt_pcd_file) $(arg gt_points_frequency)" output="screen" >
+        <remap from="cloud_pcd" to="$(arg cloud_pcd_topic)"/>
+        <param name="frame_id" value="$(arg gt_points_frame_id)" />
+    </node>
+
+</launch>

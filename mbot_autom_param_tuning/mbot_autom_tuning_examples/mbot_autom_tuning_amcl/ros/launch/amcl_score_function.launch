@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- The following AMCL score function assumes that a ground truth pose of the robot is available.
+       For example comming from a motion capture system -->
+
+  <!-- compute error between two poses, motion capture system robot pose and amcl pose -->
+  <!-- The two poses to compare -->
+  <arg name="pose_1" default="vrpn_client_node/base_link_gt/pose" /> <!-- reference pose -->
+  <arg name="pose_2" default="amcl_pose_stamped" /> <!-- target pose -->
+
+  <!-- the path in which the tf log file will be stored -->
+  <arg name="path_log_file" default="$(optenv HOME !!HOME ENV NOT SET!!)/.ros" />
+  
+  <!-- republish amcl pose stamped with covariance as pose stamped -->
+  <include file="$(find mbot_republishers)/ros/launch/amcl_pose_republisher.launch" >
+    <arg name="pose_stamped_with_covariance_in" value="/amcl_pose" />
+    <arg name="pose_stamped_out" value="amcl_pose_stamped" />
+  </include>
+  
+  <!-- compute error between two frames, motion capture system robot pose and amcl pose -->
+  <node pkg="mbot_pose_evaluator" type="tf_error_calculator" name="tf_error_calculator" output="screen">
+    <param name="reference_frame_id" type="string" value="base_link"/>
+    <param name="target_frame_id" type="string" value="base_link_gt"/>
+    
+    <param name="global_frame_id" type="string" value="map"/>
+    <param name="path_log_file" type="string" value="$(arg path_log_file)"/>
+    
+    <remap from="~event_in" to="/scoring_function/event_in" />
+    <!--remap from="/clock" to="/wall_clock" /-->
+  </node>
+
+  <!-- accumulate and get the mean error comming from a mcr_manipulation_msgs/ComponentWiseCartesianDifference topic -->
+  <node pkg="mbot_pose_evaluator" type="mean_pose_error_accumulator" name="scoring_function" output="screen">
+
+    <remap from="~cartesian_difference_in" to="tf_error_calculator/tf_error" />
+    <remap from="~mean_pose_error_out" to="smac_wrapper/algorithm_instance_quality_score" />
+    
+    <!-- single error reading, published for debugging purposes (std_msgs/Float64) -->
+    <remap from="~pose_error_out" to="pose_error" />
+
+    <!-- ignore z, roll an pitch dimensions -->
+    <param name="use_x_error" type="bool" value="true"/>
+    <param name="use_y_error" type="bool" value="true"/>
+    <param name="use_z_error" type="bool" value="false"/>
+
+    <param name="use_roll_error" type="bool" value="false"/>
+    <param name="use_pitch_error" type="bool" value="false"/>
+    <param name="use_yaw_error" type="bool" value="true"/>
+
+    <!-- premultiply the error before summing them up by this values -->
+    <param name="linear_error_multiplier" type="double" value="1.0"/>
+    <param name="angular_error_multiplier" type="double" value="1.0"/>
+    
+    <!-- the cycle rate of the node (in Hz) -->
+    <param name="loop_rate" type="double" value="30.0"/>
+  </node>
+
+</launch>

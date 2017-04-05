@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="downsampling_input" default="/occupancy_grid_to_pointcloud_node/map_cloud" />
+    <arg name="downsampling_output" default="/downsampling_filter/output_cloud" />
+    
+    <!-- Downsampling filter node -->
+    <node pkg="pcl_filters" type="downsampling_filter" name="downsampling_filter" output="screen" required="false">
+        <remap from="/downsampling_filter/input_cloud" to="$(arg downsampling_input)"/>
+        <remap from="/downsampling_filter/output_cloud" to="$(arg downsampling_output)"/>
+    </node>
+
+</launch>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- NOTE: This is an example launch file, please do not modify! -->
+
+  <!-- Republish geometry_msgs/PoseWithCovarianceStamped as geometry_msgs/PoseStamped -->
+  
+  <!-- the frequency at which the pose stamped with covariance will be republished -->
+  <arg name="republisher_node_frequency" default="15.0" />
+  
+  <!-- the topic name of the pose stamped with covariance to be republished -->
+  <arg name="pose_stamped_with_covariance_in" default="/amcl_pose" />
+  
+  <!-- the topic name in which the pose stamped msg will be published -->
+  <arg name="pose_stamped_out" default="amcl_pose_stamped_out" />
+
+  <node pkg="mbot_republishers" type="pose_with_covariance_republisher" name="amcl_republisher" output="screen">
+    <param name="node_frequency" value="$(arg republisher_node_frequency)" />
+    <remap from="~pose_stamped_with_covariance_in" to="$(arg pose_stamped_with_covariance_in)"/>
+    <remap from="~pose_stamped_out" to="$(arg pose_stamped_out)"/>
+  </node>
+
+</launch>

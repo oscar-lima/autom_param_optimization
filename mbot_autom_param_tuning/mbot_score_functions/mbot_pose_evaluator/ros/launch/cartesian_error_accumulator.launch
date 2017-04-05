@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- NOTE: This is an example launch file, please do not modify! -->
+
+  <!-- Listen to cartesian pose error difference msg, accumulate and publish the mean error -->
+
+  <!-- the topic in which the node will receive the cartesian difference between 2 poses (error) -->
+  <arg name="cartesian_difference_in" default="pose_error" />
+
+  <!-- the topic in which the pose error will be published  -->
+  <arg name="pose_error_out" default="pose_error" />
+
+  <!-- the topic in which the mean error will be published  -->
+  <arg name="mean_pose_error_out" default="accumulated_mean_pose_error" />
+
+  <!-- accumulate and get the mean error comming from a mcr_manipulation_msgs/ComponentWiseCartesianDifference topic -->
+  <node pkg="mbot_pose_evaluator" type="mean_pose_error_accumulator" name="mean_pose_error_accumulator_node" output="screen">
+
+    <remap from="~cartesian_difference_in" to="$(arg cartesian_difference_in)" />
+    <remap from="~mean_pose_error_out" to="~$(arg mean_pose_error_out)" />
+    <remap from="~pose_error_out" to="~$(arg pose_error_out)" />
+
+    <!-- ignore some dimensions, i.e. if your robot is moving in 2D -->
+    <param name="use_x_error" type="bool" value="true"/>
+    <param name="use_y_error" type="bool" value="true"/>
+    <param name="use_z_error" type="bool" value="false"/>
+
+    <param name="use_roll_error" type="bool" value="false"/>
+    <param name="use_pitch_error" type="bool" value="false"/>
+    <param name="use_yaw_error" type="bool" value="true"/>
+
+    <!-- premultiply the error before summing them up by this values -->
+    <param name="linear_error_multiplier" type="double" value="1.0"/>
+    <param name="angular_error_multiplier" type="double" value="1.0"/>
+    
+    <!-- the cycle rate of the node (in Hz) -->
+    <param name="loop_rate" type="double" value="30"/>
+  </node>
+
+</launch>

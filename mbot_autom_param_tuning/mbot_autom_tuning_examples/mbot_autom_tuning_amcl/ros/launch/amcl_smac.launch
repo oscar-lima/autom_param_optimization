@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="smac_amcl_config_file" default="$(find mbot_autom_tuning_amcl)/common/config/amcl-scenario.txt" />
+  <arg name="pcs_file" default="$(find mbot_autom_tuning_amcl)/common/config/amcl_smac_params.pcs" />
+  <arg name="smac_executable_path" default="$(find mbot_autom_param_tuning_tools)/common/tuning_software/smac-v2.10.03/smac" />
+  
+  <!-- smac third party software automatic parameter tuning software -->
+  <node pkg="mbot_autom_tuning_amcl" type="smac" name="smac" output="screen" required="true"
+        args="$(arg smac_executable_path) --scenario-file $(arg smac_amcl_config_file) --pcs-file $(arg pcs_file)" />
+  
+</launch>

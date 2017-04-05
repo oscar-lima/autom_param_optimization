@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- pointcloud which would be used as reference to compare to -->
+    <arg name="source_pointcloud" default="/ground_truth_points"/>
+    
+    <!-- pointcloud to be evaluated against a reference one -->
+    <arg name="target_pointcloud" default="/occupancy_grid_to_pointcloud_node/map_cloud"/>
+    
+    <!-- whether source_pointcloud should be transformed (rotated and translated) to match target_pointcloud -->
+    <arg name="match_pointclouds" default="true"/>
+    
+    <!-- pointcloud matching iterative closest point wrapper -->
+    <node pkg="mbot_automatic_param_tuning" type="iterative_closest_point_eval" name="iterative_closest_point_eval" output="screen" >
+        <remap from="~source_pointcloud" to="$(arg source_pointcloud)"/>
+        <remap from="~target_pointcloud" to="$(arg target_pointcloud)"/>
+        <param name="max_correspondance_distance" value="10.0" />
+        <param name="match_pointclouds" value="$(arg match_pointclouds)" />
+    </node>
+
+</launch>

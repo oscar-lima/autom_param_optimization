@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+
+import mbot_autom_tuning_amcl_ros.run_amcl_instance_client
+
+if __name__ == '__main__':
+    mbot_autom_tuning_amcl_ros.run_amcl_instance_client.main()

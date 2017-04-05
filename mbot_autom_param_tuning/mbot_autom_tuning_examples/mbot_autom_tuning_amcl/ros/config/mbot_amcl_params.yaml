@@ -1,0 +1,40 @@
+use_map_topic:               true
+first_map_only:              true
+gui_publish_rate:           -1
+# save_pose_rate:             0.5              # parameter missing!
+laser_min_range:             0.04
+laser_max_range:             5.0
+laser_max_beams:             30
+min_particles:               100
+max_particles:               2000
+kld_err:                     0.01
+kld_z:                       0.99
+# odom_alpha1:                 7.0
+# odom_alpha2:                 5.0
+# odom_alpha3:                 5.0
+# odom_alpha4:                 5.0
+# odom_alpha5:                 7.0
+# do_beamskip:               false             # parameter missing!
+# beam_skip_distance:         0.5              # parameter missing!
+# beam_skip_threshold:        0.3              # parameter missing!
+# beam_skip_error_threshold_: 0.9              # parameter missing!
+laser_z_hit:                 0.95
+laser_z_short:               0.01
+laser_z_max:                 0.05
+laser_z_rand:                0.05
+laser_sigma_hit:             0.2
+laser_lambda_short:          0.1
+laser_likelihood_max_dist:   1.0
+laser_model_type:            likelihood_field
+odom_model_type:             omni
+update_min_d:                0.05
+update_min_a:                0.01
+odom_frame_id:               odom
+base_frame_id:               base_link
+global_frame_id:             map
+resample_interval:           2
+transform_tolerance:         0.1
+recovery_alpha_slow:         0.0
+recovery_alpha_fast:         0.0
+# tf_broadcast:              true              # parameter missing!
+# bag_scan_period:          -1.0               # For slowing play-back when reading directly from a bag file # parameter missing!

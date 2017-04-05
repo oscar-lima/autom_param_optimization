@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- path to recorded rosbag with the laser scanner data -->
+    <arg name="rosbag_filename" default="filtered_29082016_10pm" />
+    <arg name="rosbag_path" default="$(find mbot_autom_param_tuning)/ros/test/bags/29082016_10pm/$(arg rosbag_filename).bag" />
+    
+    <!-- arguments that will be passed to the rosbag play -->
+    <arg name="rosbag_args" default="--clock -q $(arg rosbag_path)"/>
+    
+    <!-- run rosbag with a robot moving around the environment with laser scanner data inside -->
+    <param name="/use_sim_time" value="true" />
+    <node pkg="rosbag" type="play" name="player" output="screen" args="$(arg rosbag_args)" >
+        <remap from="clock" to="/clock"/>
+    </node>
+</launch>

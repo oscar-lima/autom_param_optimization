@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- NOTE: This is an example launch file, please do not modify! -->
+    
+  <!-- The two poses to compare -->
+  <arg name="pose_1" default="/mbot_pose_evaluator/reference_pose" /> <!-- reference pose -->
+  <arg name="pose_2" default="/mbot_pose_evaluator/target_pose" /> <!-- target pose -->
+  
+  <!-- the path in which the path log file will be stored -->
+  <arg name="path_log_file" default="$(optenv HOME !!HOME ENV NOT SET!!)/.ros" />
+
+  <!-- compute error between two poses, motion capture system robot pose and amcl pose -->
+  <node pkg="mbot_pose_evaluator" type="component_wise_pose_error_calculator_node" name="pose_error_calculator" output="screen">
+
+    <remap from="~pose_1" to="$(arg pose_1)" /> <!-- reference pose -->
+    <remap from="~pose_2" to="$(arg pose_2)" /> <!-- target pose -->
+
+    <param name="global_frame_id" type="string" value="map"/>
+    <param name="path_log_file" type="string" value="$(arg path_log_file)"/>
+    
+    <!-- the cycle rate of the node (in Hz) -->
+    <param name="loop_rate" type="double" value="30"/>
+  </node>
+
+  <!-- accumulate the error comming from the difference between two poses -->
+  <include file="$(find mbot_pose_evaluator)/ros/launch/cartesian_error_accumulator.launch">
+
+    <!-- the topic in which the node will receive the cartesian difference between 2 poses (error) -->
+    <arg name="cartesian_difference_in" value="pose_error_calculator/pose_error" />
+
+    <!-- the topic in which the pose error will be published  -->
+    <arg name="pose_error_out" default="pose_error" />
+
+    <!-- the topic in which the mean error will be published  -->
+    <arg name="mean_pose_error_out" value="mean_pose_error" />
+  </include>
+
+</launch>
