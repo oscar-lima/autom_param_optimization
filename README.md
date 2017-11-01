@@ -26,3 +26,5 @@ System ROS, which can be easily adapted to other algorithms.
 You can consult the full article [here](https://github.com/oscar-lima/autom_param_optimization/blob/master/autom_param_optimization.pdf)
 
 A nice tutorial on how to make this code work can be found [here](https://github.com/socrob/autonomous_systems/tree/master/lab2)
+
+Youtube video available [here](https://youtu.be/MHN8bOqXwxA)
