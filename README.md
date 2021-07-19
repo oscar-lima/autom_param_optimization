@@ -59,7 +59,7 @@ You can consult the full article [here](https://github.com/oscar-lima/autom_para
        catkin build
        source ~/.bashrc
 
-NOTE: Please notice for new pkgs to be recognized by ROS you need to 1) build it 2) source the .bashrc !
+**NOTE**: Please notice for new pkgs to be recognized by ROS you need to 1) build it 2) source the .bashrc !
 
 7. Run the server:
 
@@ -90,7 +90,7 @@ For more details and basic sources refer [here](https://github.com/socrob/autono
  - Record all these topics as a bag file in addition to the ones published by the amcl setup or you can even specifically record only the required topics as below.
  
          rosbag record -O bag_file_name /cmd_vel /odom /rosout /rosout_agg /tf /scan_front /vrpn_client_node/base_link_gt/pose /tf_static /amcl_pose
-- NOTE: 
+- **NOTE**: 
   - For recording own bag file - make sure to record a larger size of file at least 15-20 mb and also a good duration minimum of 3-5 min.
   - amcl_pose is included because it is needed later to compare between amcl_pose(using these default parameters) and the amcl_pose computed by SMAC tuning process
 
@@ -98,7 +98,7 @@ For more details and basic sources refer [here](https://github.com/socrob/autono
 - The bag file as input to the SMAC algorithm should not contain map-to-odom transform and /amcl_pose as recorded above,because these will be  published by the SMAC algorithm itself.So these topics need to be filtered out of the bag file using the command-
 
       rosbag filter your_bag_file_as_recorded_above without_tf_map_to_odom.bag 'topic == "/cmd_vel" or topic == "/odom" or topic == "/rosout" or topic == "/rosout_agg" or topic == "/scan_front" or topic == "/scan_rear" or topic == "/vrpn_client_node/base_link_gt/pose" or topic == "/tf_static" or topic == "/tf"  and m.transforms[0].child_frame_id != "odom"'
- - NOTE:
+ - **NOTE**:
    - If needed you can include additional topics in the above command,but these are the minimum required topics.
    - In the above command,make sure that "m.transforms[0].child_frame_id != "odom"" comes after "/tf" and not "tf_static".([reference](https://answers.ros.org/question/56935/how-to-remove-a-tf-from-a-ros-bag/))
 
