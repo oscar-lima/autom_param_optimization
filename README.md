@@ -153,7 +153,7 @@ For more details and basic sources refer [here](https://github.com/socrob/autono
 - Once the bag file is obtained,the same steps(above) followed for ros1 can be repeated,because the only difference is the new bag file.
 
 
-## Common ERRORS-
+# Common ERRORS-
 - can transform error.. look into future...- if it publishes constantly- then make sure your tf tree and transforms are correct. It might be due to some timesource issue.The algo will still seem to work ,but you will not know which are the best parameters.
 
 - process has died amcl- mainly due to short bag file.
