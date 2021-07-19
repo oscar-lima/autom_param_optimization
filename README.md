@@ -158,7 +158,10 @@ For more details and basic sources refer [here](https://github.com/socrob/autono
 
 - process has died amcl- mainly due to short bag file.
 
-# Sources
+# Additional Sources for reference
+- To understand amcl working- [video1](https://www.youtube.com/watch?v=htE5cClSy4Y&list=LL&index=14), [video2](https://www.youtube.com/watch?v=NrzmH_yerBU&list=LL&index=12&t=1s)
+- To understand tuning of AMCL parameters [source1](https://assets.researchsquare.com/files/rs-225880/v1_stamped.pdf)
+- To understand tf-related concepts [source1](https://www.youtube.com/watch?v=XCVtCBbsfGU&list=LL&index=8)
 
 
 
