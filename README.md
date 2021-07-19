@@ -158,6 +158,9 @@ For more details and basic sources refer [here](https://github.com/socrob/autono
 
 - process has died amcl- mainly due to short bag file.
 
+# Results of the experiments conducted on a large warehouse-
+- [Experimental_Results](https://github.com/poornimajd/autom_param_optimization/blob/master/SMAC_AMCL.pdf)
+
 # Additional Sources for reference
 - To understand amcl working- [video1](https://www.youtube.com/watch?v=htE5cClSy4Y&list=LL&index=14), [video2](https://www.youtube.com/watch?v=NrzmH_yerBU&list=LL&index=12&t=1s)
 - To understand tuning of AMCL parameters [source1](https://assets.researchsquare.com/files/rs-225880/v1_stamped.pdf)
