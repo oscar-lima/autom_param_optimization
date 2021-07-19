@@ -122,10 +122,10 @@ For more details and basic sources refer [here](https://github.com/socrob/autono
 - Usage and description of the scripts-
   -  Description-
 
-      1. amcl_log.py - To subscribe to the SMAC estimated amcl_pose.
-      2. ground_truth_log.py - To subscribe to the ground_truth pose.
+      1. [amcl_log.py](https://github.com/poornimajd/autom_param_optimization/blob/master/ros1_scripts/amcl_log.py) - To subscribe to the SMAC estimated amcl_pose.
+      2. [ground_truth_log.py](https://github.com/poornimajd/autom_param_optimization/blob/master/ros1_scripts/ground_truth_log.py) - To subscribe to the ground_truth pose.
       (The above two scripts are used so that the text files can be used to generate the graph of (x vs y) using matplotlib to compare the two poses graphically)
-      3. sync_both.py - To sync the SMAC estimated amcl_pose and ground_truth pose so that the values stored in the text files(after executing these scripts) can be read and the MSE(Mean_squared_error) can be calculated.
+      3. [sync_both.py](https://github.com/poornimajd/autom_param_optimization/blob/master/ros1_scripts/sync_both.py) - To sync the SMAC estimated amcl_pose and ground_truth pose so that the values stored in the text files(after executing these scripts) can be read and the MSE(Mean_squared_error) can be calculated.
 
     - Usage- 
       
