@@ -148,17 +148,17 @@ For more details and basic sources refer [here](https://github.com/socrob/autono
 - Once you get the best parameters out after training(and validation),use these to check error(MSE) as done previously.Once finalized the best parameters, you can use these as the default parameters in your amcl ros localization package.
 
 
-## FOR ROS2
+## For ROS2
 - You can use rosbridge,and directly record a bag file in ros1 or setup the world and map file in ros1.([reference](https://github.com/ros2/ros1_bridge/blob/foxy/README.md))
 - Once the bag file is obtained,the same steps(above) followed for ros1 can be repeated,because the only difference is the new bag file.
 
 
-# Common ERRORS-
+# Common ERRORS
 - can transform error.. look into future...- if it publishes constantly- then make sure your tf tree and transforms are correct. It might be due to some timesource issue.The algo will still seem to work ,but you will not know which are the best parameters.
 
 - process has died amcl- mainly due to short bag file.
 
-# Sources-
+# Sources
 
 
 
