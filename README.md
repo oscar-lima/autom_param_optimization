@@ -84,8 +84,8 @@ For more details and basic sources refer [here](https://github.com/socrob/autono
 - Generate 3 additional topics needed-
 
     1. Remap the scan topic to /scan_front
-    2. Publish the ground truth using the topic gazebo/model_states in ros1.Reference script - (Attach)
-    3. Publish the tf between the above published ground_truth and map.Reference script - (Attach) ([reference](http://wiki.ros.org/tf2/Tutorials/Writing%20a%20tf2%20broadcaster%20%28Python%29))
+    2. Publish the ground truth using the topic gazebo/model_states in ROS1. ([Reference script](https://github.com/poornimajd/autom_param_optimization/blob/master/ros1_scripts/convert_model_states.py))
+    3. Publish the tf between the above published ground_truth and map. ([Reference script](https://github.com/poornimajd/autom_param_optimization/blob/master/ros1_scripts/convert_to_tf.py)),([reference](http://wiki.ros.org/tf2/Tutorials/Writing%20a%20tf2%20broadcaster%20%28Python%29))
 
  - Record all these topics as a bag file in addition to the ones published by the amcl setup or you can even specifically record only the required topics as below.
  
@@ -102,7 +102,7 @@ For more details and basic sources refer [here](https://github.com/socrob/autono
    - If needed you can include additional topics in the above command,but these are the minimum required topics.
    - In the above command,make sure that "m.transforms[0].child_frame_id != "odom"" comes after "/tf" and not "tf_static".([reference](https://answers.ros.org/question/56935/how-to-remove-a-tf-from-a-ros-bag/))
 
-**3. Visualize the tf-tree of the filtered bag file.Tf-tree for reference- (Attach)**
+**3. Visualize the tf-tree of the filtered bag file.Tf-([tree for reference](https://github.com/poornimajd/autom_param_optimization/blob/master/ros1_scripts/frames_ros1.pdf))**
 
 **4. Following changes are needed-**
 - Change the map path in amcl_dependencies.launch, Change the map path in amcl_instance_server.launch,Change the bag_file path in amcl_run_bag.launch.Check the other launch files,if any other paths are different for your setup.In the amcl_run_bag.launch ,you can change the start and duration time if neeeded.
@@ -118,13 +118,13 @@ For more details and basic sources refer [here](https://github.com/socrob/autono
 - You can also change the friction parameters for your turtlebot(if using) by changing the mu1,mu2 parameters in .xacro file of the particular turtlebot3 model ([example file](https://github.com/ROBOTIS-GIT/turtlebot3/blob/master/turtlebot3_description/urdf/turtlebot3_burger.gazebo.xacro)).For more details refer [here](http://gazebosim.org/tutorials?tut=friction)
 
 **7. This step is optional-**
-- Compute the error between the SMAC estimated amcl_pose and ground_truth.Reference scripts - (Attach 3)
+- Compute the error between the SMAC estimated amcl_pose and ground_truth.
 - Usage and description of the scripts-
   -  Description-
 
-      1. sync_amcl.py- To subscribe to the SMAC estimated amcl_pose.
-      2. sync_odo.py- To subscribe to the ground_truth pose.
-      (The above two scripts are used so that the text files can be used to generate the graph of (x vs y) using matplotlib to compare the two poses graphically.Refernce script to generate graph- (Attach))
+      1. amcl_log.py - To subscribe to the SMAC estimated amcl_pose.
+      2. ground_truth_log.py - To subscribe to the ground_truth pose.
+      (The above two scripts are used so that the text files can be used to generate the graph of (x vs y) using matplotlib to compare the two poses graphically)
       3. sync_both.py - To sync the SMAC estimated amcl_pose and ground_truth pose so that the values stored in the text files(after executing these scripts) can be read and the MSE(Mean_squared_error) can be calculated.
 
     - Usage- 
